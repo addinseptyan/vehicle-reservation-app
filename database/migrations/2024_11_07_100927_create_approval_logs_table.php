@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('approval_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('reservation_id')->constrained();
-            $table->foreignId('approver_id')->constrained('users');
-            $table->enum('approval_status', ['approved', 'rejected']);
+            $table->foreignId('reservation_id')->constrained()->onDelete('cascade');
+            $table->foreignId('approver_id')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['approved', 'rejected']);
+            $table->timestamp('approval_at')->nullable()->comment('Time when the approval was made');
             $table->timestamps();
         });
     }

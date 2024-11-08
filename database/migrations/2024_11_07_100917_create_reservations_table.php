@@ -18,6 +18,8 @@ return new class extends Migration
             $table->foreignId('driver_id')->nullable()->constrained('users');
             $table->foreignId('approver_id')->constrained('users');
             $table->foreignId('approver_level2_id')->nullable()->constrained('users');
+            $table->enum('approved_by_supervisor', ['pending', 'approved', 'rejected'])->default('pending')->comment('Approval from supervisor');
+            $table->enum('approved_by_manager', ['pending', 'approved', 'rejected'])->default('pending')->comment('Approval from manager');
             $table->enum('reservation_status', ['pending', 'approved', 'rejected']);
             $table->dateTime('usage_start');
             $table->dateTime('usage_end');
