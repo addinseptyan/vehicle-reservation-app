@@ -1,66 +1,116 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Vehicle Reservation Application
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Aplikasi ini dirancang untuk mempermudah proses pemesanan dan pemantauan kendaraan di perusahaan tambang nikel. Aplikasi ini memungkinkan admin untuk mengatur pemesanan kendaraan, sementara pihak yang berwenang dapat menyetujui atau menolak pemesanan.
 
-## About Laravel
+## Informasi Teknologi
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Database**: MySQL v8.0
+-   **PHP Version**: 8.2
+-   **Framework**: Laravel 11, Filament 3
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Akun Pengguna
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Aplikasi ini memiliki beberapa pengguna dengan peran berbeda. Berikut adalah daftar username dan password yang dapat digunakan untuk masuk ke aplikasi.
 
-## Learning Laravel
+| Role     | Username              | Password |
+| -------- | --------------------- | -------- |
+| Admin    | admin@email.com       | password |
+| Approver | supervisor@email.com  | password |
+| Approver | supervisor2@email.com | password |
+| Approver | manager@email.com     | password |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+> **Catatan:** Password di atas adalah default. Silakan ubah password setelah login pertama untuk keamanan lebih lanjut.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Panduan Penggunaan
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 1. Setup Aplikasi
 
-## Laravel Sponsors
+-   **Clone Repository**:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+    ```bash
+    git clone https://github.com/addinseptyan/vehicle-reservation-app.git
+    cd vehicle-reservation-app
+    ```
 
-### Premium Partners
+-   **Instal Dependensi**:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+    ```bash
+    composer install
+    npm install
+    npm run build
+    ```
 
-## Contributing
+-   **Konfigurasi File `.env`**:
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+    -   Salin file `.env.example` menjadi `.env`.
+    -   Atur konfigurasi database sesuai dengan setup lokal Anda.
+    -   Atur `APP_URL` untuk mendukung akses ke aplikasi ini.
 
-## Code of Conduct
+-   **Generate Key**:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+    ```bash
+    php artisan key:generate
+    ```
 
-## Security Vulnerabilities
+-   **Migrasi Database**:
+    ```bash
+    php artisan migrate --seed
+    ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Menjalankan Aplikasi
 
-## License
+-   Jalankan server Laravel:
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+    ```bash
+    php artisan serve
+    ```
+
+-   Jalankan fitur export excel di terminal berbeda:
+
+    ```bash
+    php artisan queue:work
+    ```
+
+-   Aplikasi dapat diakses di [http://localhost:8000/dashboard](http://localhost:8000/dashboard).
+
+### 3. Menggunakan Aplikasi
+
+-   **Login**:
+
+    -   Masuk menggunakan akun Admin atau Approver yang tercantum di atas.
+    -   Admin dapat mengatur pemesanan, mengelola driver, dan melihat laporan.
+    -   Approver dapat menyetujui atau menolak pemesanan kendaraan.
+
+-   **Dashboard**:
+
+    -   Pada halaman Dashboard, admin dapat melihat grafik pemakaian kendaraan, total pemakaian bahan bakar, dan performa kendaraan secara visual.
+
+-   **Pemesanan Kendaraan**:
+
+    -   Admin dapat menambahkan pemesanan kendaraan, memilih driver, serta memilih approver untuk persetujuan.
+    -   Pemesanan kendaraan harus disetujui minimal dua level (misalnya Supervisor dan Manager).
+
+-   **Persetujuan**:
+    -   Setelah pemesanan diinput, pihak approver akan menerima notifikasi untuk melakukan persetujuan.
+    -   Approver dapat melihat status pemesanan dan memberikan persetujuan atau penolakan melalui aplikasi.
+
+### 4. Fitur Export Laporan
+
+-   Admin dapat mengekspor laporan pemesanan kendaraan secara periodik dalam format Excel melalui halaman Laporan.
+
+## Catatan Tambahan
+
+-   Pastikan untuk memeriksa konfigurasi server jika Anda menggunakan aplikasi ini di lingkungan produksi.
+-   Gantilah password default untuk menghindari akses yang tidak sah.
+
+---
+
+### Troubleshooting
+
+Jika terjadi kendala, pastikan:
+
+-   **Database** telah dikonfigurasi dengan benar dan layanan sedang berjalan.
+-   Versi **PHP** dan **Composer** yang digunakan sudah sesuai.
+-   **Environment File** (`.env`) sudah diatur dengan benar.
+
+Jika masih mengalami kendala, silakan hubungi tim pengembang atau cek dokumentasi Laravel untuk solusi lebih lanjut.
