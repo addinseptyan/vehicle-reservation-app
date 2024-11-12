@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\BookingExporter;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Booking;
@@ -19,6 +20,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\BookingResource\RelationManagers;
 use App\Filament\Resources\BookingResource\RelationManagers\ApprovalsRelationManager;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ExportBulkAction;
 
 class BookingResource extends Resource
 {
@@ -69,10 +72,14 @@ class BookingResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])
+            ->headerActions([
+                ExportAction::make()->exporter(BookingExporter::class)
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+                ExportBulkAction::make()->exporter(BookingExporter::class)
             ]);
     }
 
